@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Link from 'next/link'
+import Nav from "../components/navigation";
 
 export default ()=>(
   <div className="container">
@@ -13,9 +14,7 @@ export default ()=>(
     </Head>
 
 
-    <Link prefetch href="/">
-      <a>home</a>
-    </Link>{' '}
+    <Nav/>
 
     <form>
 

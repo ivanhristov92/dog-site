@@ -1,9 +1,8 @@
 import Link from 'next/link'
+import Nav from "../components/navigation";
 
 export default ()=>(
   <div>
-    <Link prefetch href="/new-ad">
-      <a>new ad</a>
-    </Link>{' '}
+    <Nav />
   </div>
 )
