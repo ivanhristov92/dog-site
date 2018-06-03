@@ -1,0 +1,50 @@
+{
+  "name": "BreedingAd",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "price": {
+      "type": "number"
+    },
+    "color": {
+      "type": "string"
+    },
+    "sex": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "info": {
+      "type": "string"
+    },
+    "numberOfDogs": {
+      "type": "number"
+    },
+    "features": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "breed": {
+      "type": "belongsTo",
+      "model": "Breed",
+      "foreignKey": ""
+    },
+    "images": {
+      "type": "hasMany",
+      "model": "FileMeta",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
