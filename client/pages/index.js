@@ -3,6 +3,8 @@ import Nav from "../components/navigation";
 
 export default ()=>(
   <div>
-    <Nav />
+    <div className={"container"}>
+      <Nav />
+    </div>
   </div>
 )
