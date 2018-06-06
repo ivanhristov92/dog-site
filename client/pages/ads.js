@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Nav from "../components/navigation";
 import Link from 'next/link'
+import FilterMenu from '../components/ads/FilterMenu'
 
 const cards = [1,2,3,4,5,];
 
@@ -16,6 +17,7 @@ export default () => (
 
     </Head>
     <Nav />
+    <FilterMenu />
     <div className={"row"}>
 
     {
