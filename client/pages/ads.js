@@ -1,3 +1,4 @@
+import { Container, Row, Col } from 'reactstrap'
 import Head from 'next/head'
 import Nav from "../components/navigation";
 import Link from 'next/link'
@@ -8,7 +9,7 @@ const cards = [1,2,3,4,5,];
 const MOCK_URL = "https://www.cesarsway.com/sites/newcesarsway/files/styles/large_article_preview/public/Natural-Dog-Law-2-To-dogs%2C-energy-is-everything.jpg?itok=Z-ujUOUr"
 
 export default () => (
-  <div className={"container"} key={"ads"}>
+  <Container fluid key={"ads"}>
 
     <Head>
       <title>Ads</title>
@@ -17,28 +18,30 @@ export default () => (
 
     </Head>
     <Nav />
-    <FilterMenu />
-    <div className={"row"}>
+    <Row>
+      <Col sm={3}>
+        <FilterMenu />      
+      </Col>
+      <Col sm={9}>
 
-    {
-      cards.map(()=>{
-        return (
-          <div className={"col-sm-4"}>
-            <Link href="/ads/1">
-              <div className="card" style={{"width": "18rem", cursor: "pointer"}}>
-                <img className="card-img-top" src={MOCK_URL} alt="Card image cap" />
-                <div className="card-body">
-                  <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-                    content.</p>
+      {
+        cards.map((c)=>{
+          return (
+            <div key={c} className={"col-sm-4"}>
+              <Link href="/ads/1">
+                <div className="card" style={{"width": "18rem", cursor: "pointer"}}>
+                  <img className="card-img-top" src={MOCK_URL} alt="Card image cap" />
+                  <div className="card-body">
+                    <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+                      content.</p>
+                  </div>
                 </div>
+              </Link>
               </div>
-            </Link>
-            </div>
-        )
-      })
-    }
-    </div>
-
-
-  </div>
+          )
+        })
+      }
+      </Col>
+    </Row>
+  </Container>
 )

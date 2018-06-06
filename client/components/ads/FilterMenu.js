@@ -10,7 +10,7 @@ import Keyword from './filterProp/Keyword'
 const MIN_DISTANCE_VALUE = 0;
 const MAX_DISTANCE_VALUE = 200;
 const breedType = ["All Breeds", "Boxer", "Pitbull", "Puppy", "Doggy"]
-const advertType = ["All Advert Type", "For Sale", "For Adopt", "For Stud", "Found"]
+const advertType = ["All Advert Type", "For Sale", "For Adopt", "For Stud", "Lost/Found"]
 
 class FilterMenu extends Component {
   constructor(props) {
@@ -49,7 +49,20 @@ class FilterMenu extends Component {
       .then(response => {
         response.data.forEach(breed => {
           if (breed.title.toLowerCase() === this.state.breed.toLowerCase()) {
-            lookingIds.push(breed.id)
+            if (this.state.advertType = this.getAdvertType()[0]) {
+              // Check if selected advert type is "All Advert Type"
+              lookingIds.push(breed.id)
+            } else if (this.state.advertType.toLowerCase() === "breed.advertType.toLowerCase()") {
+              lookingIds.push(breed.id)              
+            }
+          } else if (this.state.breed = this.getBreedType()[0]) {
+            // Check if selected breed is "All breeds"
+            if (this.state.advertType = this.getAdvertType()[0]) {
+              // Check if selected advert type is "All Advert Type"
+              lookingIds.push(breed.id)
+            } else if (this.state.advertType.toLowerCase() === "breed.advertType.toLowerCase()") {
+              lookingIds.push(breed.id)              
+            }           
           }
         })
       })
