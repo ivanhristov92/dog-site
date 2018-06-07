@@ -10,8 +10,10 @@ import Keyword from './filterProp/Keyword'
 
 const MIN_DISTANCE_VALUE = 0;
 const MAX_DISTANCE_VALUE = 200;
-const breedType = ["All Breeds", "Boxer", "Pitbull", "Puppy", "Doggy"]
-const advertType = ["All Advert Type", "For Sale", "For Adopt", "For Stud", "Lost/Found"]
+const breedType = ["All Breeds", "Boxer", "Pitbull", "Puppy", "Doggy"];
+const advertType = ["All Advert Type", "For Sale", "For Adopt", "For Stud", "Lost/Found"];
+const URL_BREEDING_ADS = "http://localhost:4000/api/BreedingAds";
+const URL_BREEDS = "http://localhost:4000/api/Breeds"
 
 class FilterMenu extends Component {
   constructor(props) {
@@ -38,7 +40,7 @@ class FilterMenu extends Component {
   }
 
   setMinMaxPrice () {
-    axios.get("http://localhost:4000/api/BreedingAds")
+    axios.get(URL_BREEDING_ADS)
       .then(response => {
         const data = response.data
         let minPrice = 100000
@@ -76,7 +78,7 @@ class FilterMenu extends Component {
     let lookingIds = []
     
     axios
-      .get("http://localhost:4000/api/Breeds")
+      .get(URL_BREEDS)
       .then(response => {
         response.data.forEach(breed => {
           if (breed.title.toLowerCase() === this.state.breed.toLowerCase()) {
@@ -99,7 +101,7 @@ class FilterMenu extends Component {
       })
       .then(() => {
         axios
-        .get("http://localhost:4000/api/BreedingAds")
+        .get(URL_BREEDING_ADS)
         .then(response => {
           const data = response.data;
           const keyword = this.state.keyword.toLowerCase();
