@@ -10,10 +10,12 @@
 *.swp
 *.tgz
 *.xml
+package-lock.json
 .DS_Store
 .idea
 .project
 .strong-pm
+.next
 coverage
 node_modules
 npm-debug.log

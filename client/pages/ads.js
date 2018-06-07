@@ -4,7 +4,7 @@ import Nav from "../components/navigation";
 import Link from 'next/link'
 import FilterMenu from '../components/ads/FilterMenu'
 
-const cards = [1,2,3,4,5,];
+const cards = [1,2,3,4,5,6];
 
 const MOCK_URL = "https://www.cesarsway.com/sites/newcesarsway/files/styles/large_article_preview/public/Natural-Dog-Law-2-To-dogs%2C-energy-is-everything.jpg?itok=Z-ujUOUr"
 
@@ -19,15 +19,15 @@ export default () => (
     </Head>
     <Nav />
     <Row>
-      <Col sm={3}>
+      <Col sm={3} xs={4}>
         <FilterMenu />      
       </Col>
-      <Col sm={9}>
-
+      <Col sm={9} xs={8}>
+      <Row>
       {
         cards.map((c)=>{
           return (
-            <div key={c} className={"col-sm-4"}>
+            <Col sm={4} xs={6} key={c}>
               <Link href="/ads/1">
                 <div className="card" style={{"width": "18rem", cursor: "pointer"}}>
                   <img className="card-img-top" src={MOCK_URL} alt="Card image cap" />
@@ -37,10 +37,11 @@ export default () => (
                   </div>
                 </div>
               </Link>
-              </div>
+            </Col>
           )
         })
       }
+      </Row>
       </Col>
     </Row>
   </Container>
