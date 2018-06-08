@@ -1,23 +1,21 @@
-import React, { Component } from 'react';
-import { Form, Button } from 'reactstrap';
-import axios from 'axios'
-import DogBreed from './filterProp/DogBreed'
-import AdvertType from './filterProp/AdvertType'
-import Location from './filterProp/Location'
-import MinPrice from './filterProp/MinPrice'
-import MaxPrice from './filterProp/MaxPrice'
-import Keyword from './filterProp/Keyword'
+import React, { Component } from "react";
+import { Form, Button } from "reactstrap";
+import axios from "axios";
+import DogBreed from "./filterProp/DogBreed";
+import AdvertType from "./filterProp/AdvertType";
+import Location from "./filterProp/Location";
+import MinPrice from "./filterProp/MinPrice";
+import MaxPrice from "./filterProp/MaxPrice";
+import Keyword from "./filterProp/Keyword";
 
-const MIN_DISTANCE_VALUE = 0;
-const MAX_DISTANCE_VALUE = 200;
 const breedType = ["All Breeds", "Boxer", "Pitbull", "Puppy", "Doggy"];
 const advertType = ["All Advert Type", "For Sale", "For Adopt", "For Stud", "Lost/Found"];
 const URL_BREEDING_ADS = "http://localhost:4000/api/BreedingAds";
-const URL_BREEDS = "http://localhost:4000/api/Breeds"
+const URL_BREEDS = "http://localhost:4000/api/Breeds";
 
 class FilterMenu extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       breed: this.getBreedType()[0],
@@ -36,31 +34,31 @@ class FilterMenu extends Component {
   }
 
   componentDidMount() {
-    this.setMinMaxPrice()
+    this.setMinMaxPrice();
   }
 
   setMinMaxPrice () {
     axios.get(URL_BREEDING_ADS)
       .then(response => {
-        const data = response.data
-        let minPrice = 100000
-        let maxPrice = 0
+        const data = response.data;
+        let minPrice = 100000;
+        let maxPrice = 0;
 
         data.forEach(d => {
-          const price = d.price
+          const price = d.price;
           if (price < minPrice) {
-            minPrice = price
+            minPrice = price;
           } else if (price > maxPrice) {
-            maxPrice = price
+            maxPrice = price;
           }
-        })
+        });
         this.setState({
           minPrice,
           maxPrice,
           selectedMinPrice: minPrice,
           selectedMaxPrice: maxPrice
-        })
-      })
+        });
+      });
   }
 
   onChangeHandler (e) {
@@ -73,84 +71,84 @@ class FilterMenu extends Component {
   }
 
   onSubmitHandler (e) {
-    e.preventDefault()
+    e.preventDefault();
 
-    let lookingIds = []
+    let lookingIds = [];
     
     axios
       .get(URL_BREEDS)
       .then(response => {
         response.data.forEach(breed => {
           if (breed.title.toLowerCase() === this.state.breed.toLowerCase()) {
-            if (this.state.advertType = this.getAdvertType()[0]) {
+            if (this.state.advertType === this.getAdvertType()[0]) {
               // Advert type is "All Advert Type"
-              lookingIds.push(breed.id)
+              lookingIds.push(breed.id);
             } else if (this.state.advertType.toLowerCase() === "breed.advertType.toLowerCase()") {
-              lookingIds.push(breed.id)              
+              lookingIds.push(breed.id);              
             }
-          } else if (this.state.breed = this.getBreedType()[0]) {
+          } else if (this.state.breed === this.getBreedType()[0]) {
             // Selected breed is "All breeds"
-            if (this.state.advertType = this.getAdvertType()[0]) {
+            if (this.state.advertType === this.getAdvertType()[0]) {
               // Advert type is "All Advert Type"
-              lookingIds.push(breed.id)
+              lookingIds.push(breed.id);
             } else if (this.state.advertType.toLowerCase() === "breed.advertType.toLowerCase()") {
-              lookingIds.push(breed.id)              
+              lookingIds.push(breed.id);              
             }           
           }
-        })
+        });
       })
       .then(() => {
         axios
-        .get(URL_BREEDING_ADS)
-        .then(response => {
-          const data = response.data;
-          const keyword = this.state.keyword.toLowerCase();
-          const location = this.state.location.toLowerCase();
-          const selectedMinPrice = this.state.selectedMinPrice;
-          const selectedMaxPrice = this.state.selectedMaxPrice;
+          .get(URL_BREEDING_ADS)
+          .then(response => {
+            const data = response.data;
+            const keyword = this.state.keyword.toLowerCase();
+            const location = this.state.location.toLowerCase();
+            const selectedMinPrice = this.state.selectedMinPrice;
+            const selectedMaxPrice = this.state.selectedMaxPrice;
 
-          data.forEach(breedAd => {
-            const breedId = breedAd.breedId;
-            const info = breedAd.info.toLowerCase();
-            const title = breedAd.title.toLowerCase();
-            const features = breedAd.features.toLowerCase();
-            const city = breedAd.city.toLowerCase();
-            const price = breedAd.price;
+            data.forEach(breedAd => {
+              const breedId = breedAd.breedId;
+              const info = breedAd.info.toLowerCase();
+              const title = breedAd.title.toLowerCase();
+              const features = breedAd.features.toLowerCase();
+              const city = breedAd.city.toLowerCase();
+              const price = breedAd.price;
 
-            lookingIds.forEach(id => {
-              if (breedId === id && selectedMinPrice <= price && selectedMaxPrice >= price) {
-                if (location === "") {
-                  if (keyword === "") {
-                    console.log(breedAd)
-                  } else if (info.includes(keyword) || title.includes(keyword) || features.includes(keyword) || city.includes(keyword)) {
-                    console.log(breedAd)
-                  }
-                } else if (city === location) {
-                  if (keyword === "") {
-                    console.log(breedAd)
-                  } else if (info.includes(keyword) || title.includes(keyword) || features.includes(keyword) || city.includes(keyword)) {
-                    console.log(breedAd)
+              lookingIds.forEach(id => {
+                if (breedId === id && selectedMinPrice <= price && selectedMaxPrice >= price) {
+                  if (location === "") {
+                    if (keyword === "") {
+                      global.console.log(breedAd);
+                    } else if (info.includes(keyword) || title.includes(keyword) || features.includes(keyword) || city.includes(keyword)) {
+                      global.console.log(breedAd);
+                    }
+                  } else if (city === location) {
+                    if (keyword === "") {
+                      global.console.log(breedAd);
+                    } else if (info.includes(keyword) || title.includes(keyword) || features.includes(keyword) || city.includes(keyword)) {
+                      global.console.log(breedAd);
+                    }
                   }
                 }
-              }
-            })
-          })          
-        })
-        .catch(err => {
-          console.log(err)
-        })
+              });
+            });          
+          })
+          .catch(err => {
+            global.console.log(err);
+          });
       })
       .catch(err => {
-        console.log(err)
-      })
+        global.console.log(err);
+      });
   }
 
   getBreedType() {
-    return breedType
+    return breedType;
   }
 
   getAdvertType() {
-    return advertType
+    return advertType;
   }
 
   render () {
@@ -188,4 +186,4 @@ class FilterMenu extends Component {
   }
 }
 
-export default FilterMenu
+export default FilterMenu;
